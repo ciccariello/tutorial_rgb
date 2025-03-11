@@ -88,7 +88,7 @@ static void anim_timer_handle(lv_obj_t *parent)
 //        }
     }
     
-    if( count == 60 )
+    if( count == 100 )
      {  
 //		        lv_obj_align(img_logo, LV_ALIGN_CENTER, 40, 0);
 //        img_logo2 = lv_img_create( page );
