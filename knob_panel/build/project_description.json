@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "c3_knob_panel",
-    "project_version":    "1",
+    "project_version":    "17e2d7b-dirty",
     "project_path":       "C:/Users/myp14/git/repository3/knob_panel",
     "idf_path":           "D:/Espressif/frameworks/esp-idf-v5.4-3",
     "build_dir":          "C:/Users/myp14/git/repository3/knob_panel/build",
