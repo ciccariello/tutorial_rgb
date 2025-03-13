@@ -83,14 +83,17 @@ static void light_2color_event_cb(lv_event_t *e)
                 }
             }
         }
-    } else if (LV_EVENT_CLICKED == code) {
-        light_set_conf.light_cck = \
-                                   (LIGHT_CCK_WARM == light_set_conf.light_cck) ? (LIGHT_CCK_COOL) : (LIGHT_CCK_WARM);
-    } else if (LV_EVENT_LONG_PRESSED == code) {
+     } 
+    else if( LV_EVENT_CLICKED == code ) 
+     {                                 // if is true returns LIGHT_CCK_COOL else it returns LIGHT_CCK_WARM , is a toggler
+        light_set_conf.light_cck = ( LIGHT_CCK_WARM == light_set_conf.light_cck ) ? (LIGHT_CCK_COOL) : (LIGHT_CCK_WARM);
+     } 
+    else if( LV_EVENT_LONG_PRESSED == code ) 
+     {
         lv_indev_wait_release(lv_indev_get_next(NULL));
         ui_remove_all_objs_from_encoder_group();
         lv_func_goto_layer(&menu_layer);
-    }
+     }
 }
 
 void ui_light_2color_init(lv_obj_t *parent)
@@ -218,34 +221,43 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
 
     feed_clock_time();
 
-    if (is_time_out(&time_20ms)) {
-
-        if ((light_set_conf.light_pwm ^ light_xor.light_pwm) || (light_set_conf.light_cck ^ light_xor.light_cck)) {
+    if( is_time_out(&time_20ms) ) 
+     {
+        // bitwise XOR operation  1 ^ 1 = 0
+        if( (light_set_conf.light_pwm ^ light_xor.light_pwm) || (light_set_conf.light_cck ^ light_xor.light_cck) ) 
+         {
             light_xor.light_pwm = light_set_conf.light_pwm;
             light_xor.light_cck = light_set_conf.light_cck;
 
-            if (LIGHT_CCK_COOL == light_xor.light_cck) {
-                RGB_color = (0xFF * light_xor.light_pwm / 100) << 16 | (0xFF * light_xor.light_pwm / 100) << 8 | (0xFF * light_xor.light_pwm / 100) << 0;
-            } else {
-                RGB_color = (0xFF * light_xor.light_pwm / 100) << 16 | (0xFF * light_xor.light_pwm / 100) << 8 | (0x33 * light_xor.light_pwm / 100) << 0;
-            }
-//            bsp_led_rgb_set((RGB_color >> 16) & 0xFF, (RGB_color >> 8) & 0xFF, (RGB_color >> 0) & 0xFF);
-             bsp_led_rgb_set(colour, colour, colour);
+//            if( LIGHT_CCK_COOL == light_xor.light_cc k) 
+//             {
+//                RGB_color = (0xFF * light_xor.light_pwm / 100) << 16 | (0xFF * light_xor.light_pwm / 100) << 8 | (0xFF * light_xor.light_pwm / 100) << 0;
+//             } 
+//            else 
+//             {
+//                RGB_color = (0xFF * light_xor.light_pwm / 100) << 16 | (0xFF * light_xor.light_pwm / 100) << 8 | (0x33 * light_xor.light_pwm / 100) << 0;
+//             }
+
             lv_obj_add_flag(img_light_pwm_100, LV_OBJ_FLAG_HIDDEN);
             lv_obj_add_flag(img_light_pwm_75, LV_OBJ_FLAG_HIDDEN);
             lv_obj_add_flag(img_light_pwm_50, LV_OBJ_FLAG_HIDDEN);
             lv_obj_add_flag(img_light_pwm_25, LV_OBJ_FLAG_HIDDEN);
             lv_obj_add_flag(img_light_pwm_0, LV_OBJ_FLAG_HIDDEN);
 
-            if (light_set_conf.light_pwm) {
+            if( light_set_conf.light_pwm ) 
+             {
                 lv_label_set_text_fmt(label_pwm_set, "%d%%", light_set_conf.light_pwm);
-            } else {
+             } 
+            else 
+             {
                 lv_label_set_text(label_pwm_set, "--");
-            }
+             }
 
             uint8_t cck_set = (uint8_t)light_xor.light_cck;
 
-            switch (light_xor.light_pwm) {
+            switch( light_xor.light_pwm ) 
+             {
+				
             case 100:
                 lv_obj_clear_flag(img_light_pwm_100, LV_OBJ_FLAG_HIDDEN);
                 lv_img_set_src(img_light_pwm_100, light_image.img_pwm_100[cck_set]);
@@ -267,12 +279,13 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
                 break;
             default:
                 break;
-            }
-        }
-        
+            
+             }
+             
+              bsp_led_rgb_set(colour, 0x00, 0x00 );        
         /*Copy the previous LED and set a brightness*/
 lv_led_set_color(led1, lv_color_make(colour , 0x0, 0x0));
-lv_led_on(led1);
+//lv_led_on(led1);
 
 /*Copy the previous LED and set a brightness*/
 
@@ -282,11 +295,16 @@ lv_led_on(led2);
 /*Copy the previous LED and set a brightness*/
 
 lv_led_set_color(led3, lv_color_make( 0x0, 0x0,colour ));
-lv_led_on(led3);
+//lv_led_on(led3);
 
 /*Copy the previous LED and set a brightness*/
 
-lv_led_set_color(led4, lv_color_make(colour , colour ,colour ));
-lv_led_on(led4);
+lv_led_set_color(led4, lv_color_make(colour , colour ,0x00 ));
+lv_led_on(led4);            
+       
+        }
+        
+        
+
     }
 }
