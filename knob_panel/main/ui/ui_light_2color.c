@@ -282,7 +282,7 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
             
              }
              
-              bsp_led_rgb_set(colour, 0x00, 0x00 );        
+              bsp_led_rgb_set( 0x00,colour, 0x00 );        
         /*Copy the previous LED and set a brightness*/
 lv_led_set_color(led1, lv_color_make(colour , 0x0, 0x0));
 //lv_led_on(led1);
@@ -299,7 +299,7 @@ lv_led_set_color(led3, lv_color_make( 0x0, 0x0,colour ));
 
 /*Copy the previous LED and set a brightness*/
 
-lv_led_set_color(led4, lv_color_make(colour , colour ,0x00 ));
+lv_led_set_color(led4, lv_color_make(0x00 , colour ,0x00 ));
 lv_led_on(led4);            
        
         }
