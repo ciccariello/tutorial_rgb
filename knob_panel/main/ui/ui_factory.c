@@ -154,7 +154,7 @@ void lv_create_factory_title(lv_obj_t *parent, const char *title_name, factory_s
 
     lv_obj_t *label_title = lv_label_create(parent);
     lv_obj_set_style_text_color(label_title, lv_color_white(), 0);
-    lv_obj_set_style_text_font(label_title, &font_SourceHanSansCN_20, 0);
+    lv_obj_set_style_text_font(label_title, &HelveticaNeue_Regular_24, 0);
     lv_label_set_text(label_title, title_name);
     lv_obj_center(label_title);
     lv_obj_align(label_title, LV_ALIGN_TOP_MID, 0, 10);
@@ -170,7 +170,7 @@ void lv_create_rst_select(lv_obj_t *parent)
         lv_img_set_src(imgbtn_TEST_OK, &language_select);
 
         label_EN = lv_label_create(imgbtn_TEST_OK);
-        lv_obj_set_style_text_font(label_EN, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_EN, &HelveticaNeue_Regular_24, 0);
         lv_label_set_text(label_EN, "成功");
         lv_obj_set_style_text_color(label_EN, lv_color_hex(COLOUR_BLACK), 0);
         lv_obj_align(label_EN, LV_ALIGN_CENTER, 0, 0);
@@ -180,7 +180,7 @@ void lv_create_rst_select(lv_obj_t *parent)
         lv_img_set_src(imgbtn_TEST_FAILED, &language_unselect);
 
         label_CN = lv_label_create(imgbtn_TEST_FAILED);
-        lv_obj_set_style_text_font(label_CN, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_CN, &HelveticaNeue_Regular_24, 0);
         lv_label_set_text(label_CN, "失败");
         lv_obj_set_style_text_opa(label_CN, LV_OPA_40, 0);
         lv_obj_set_style_text_color(label_CN, lv_color_hex(COLOUR_BLACK), 0);
@@ -220,14 +220,14 @@ static void lv_create_test_encode(lv_obj_t *factory_bg, uint8_t event)
         label_guide = lv_label_create(factory_bg);
         lv_obj_set_style_text_align(label_guide, LV_TEXT_ALIGN_CENTER, 0);
         lv_obj_set_style_text_color(label_guide, lv_color_white(), 0);
-        lv_obj_set_style_text_font(label_guide, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_guide, &HelveticaNeue_Regular_24, 0);
         lv_obj_align(label_guide, LV_ALIGN_CENTER, 0, 0);
         lv_label_set_text(label_guide, "左旋");
 
         lv_obj_t *label_version = lv_label_create(factory_bg);
         lv_obj_set_style_text_align(label_version, LV_TEXT_ALIGN_CENTER, 0);
         lv_obj_set_style_text_color(label_version, lv_color_white(), 0);
-        lv_obj_set_style_text_font(label_version, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_version, &HelveticaNeue_Regular_24, 0);
         lv_obj_align(label_version, LV_ALIGN_CENTER, 0, 80);
         lv_label_set_text_fmt(label_version, "Ver: V%u.%u.%u", \
             DEMO_VERSION_MAJOR, DEMO_VERSION_MINOR, DEMO_VERSION_PATCH);
@@ -289,7 +289,7 @@ static void lv_create_test_LCD(lv_obj_t *factory_bg, uint8_t event)
 
         label_guide = lv_label_create(obj_BG);
         lv_obj_set_style_text_color(label_guide, lv_color_white(), 0);
-        lv_obj_set_style_text_font(label_guide, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_guide, &HelveticaNeue_Regular_24, 0);
         lv_obj_center(label_guide);
         lv_obj_align(label_guide, LV_ALIGN_CENTER, 0, 0);
         lv_label_set_text(label_guide, "按下下一步");
@@ -354,7 +354,7 @@ static void lv_create_test_Sound(lv_obj_t *factory_bg, uint8_t event)
 
         lv_obj_t *label_guide = lv_label_create(obj_BG);
         lv_obj_set_style_text_color(label_guide, lv_color_white(), 0);
-        lv_obj_set_style_text_font(label_guide, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_guide, &HelveticaNeue_Regular_24, 0);
         lv_obj_center(label_guide);
         lv_obj_align(label_guide, LV_ALIGN_CENTER, 0, -20);
         lv_label_set_text(label_guide, "喇叭正常?");
@@ -398,7 +398,7 @@ static void lv_create_test_LED(lv_obj_t *factory_bg, uint8_t event)
 
         label_guide = lv_label_create(obj_BG);
         lv_obj_set_style_text_color(label_guide, lv_color_white(), 0);
-        lv_obj_set_style_text_font(label_guide, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_guide, &HelveticaNeue_Regular_24, 0);
         lv_obj_center(label_guide);
         lv_obj_align(label_guide, LV_ALIGN_CENTER, 0, -30);
         lv_label_set_text(label_guide, "左旋:暗\n右旋:亮\n按下:下一步");
@@ -455,7 +455,7 @@ static void lv_create_test_IR(lv_obj_t *factory_bg, uint8_t event)
         label_guide = lv_label_create(factory_bg);
         lv_obj_set_style_text_align(label_guide, LV_TEXT_ALIGN_CENTER, 0);
         lv_obj_set_style_text_color(label_guide, lv_color_white(), 0);
-        lv_obj_set_style_text_font(label_guide, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_guide, &HelveticaNeue_Regular_24, 0);
         lv_obj_center(label_guide);
         lv_obj_align(label_guide, LV_ALIGN_CENTER, 0, 0);
         lv_label_set_text(label_guide, "1:跳帽先接 IR_TX\n 2:2S后再接 IR_RX\n 3:等待结果");
@@ -503,7 +503,7 @@ static void lv_create_test_Result(lv_obj_t *factory_bg, uint8_t event)
         lv_label_set_recolor(label_guide, true);
         lv_obj_set_style_base_dir(label_guide, LV_BASE_DIR_LTR, 0);
         lv_obj_set_style_text_color(label_guide, lv_color_white(), 0);
-        lv_obj_set_style_text_font(label_guide, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_guide, &HelveticaNeue_Regular_24, 0);
         lv_obj_center(label_guide);
         lv_obj_align(label_guide, LV_ALIGN_TOP_MID, 0, 50);
         lv_label_set_text(label_guide, test_Result);

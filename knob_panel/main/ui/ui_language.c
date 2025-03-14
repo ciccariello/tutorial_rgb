@@ -111,7 +111,7 @@ void ui_language_init(lv_obj_t *parent)
     lv_obj_clear_state(imgbtn_lang_CN, LV_STATE_CHECKED);
 
     label_CN = lv_label_create(imgbtn_lang_CN);
-    lv_obj_set_style_text_font(label_CN, &font_SourceHanSansCN_Medium_22, 0);
+    lv_obj_set_style_text_font(label_CN, &HelveticaNeue_Regular_24, 0);
     lv_label_set_text(label_CN, "中文");
     lv_obj_set_style_text_opa(label_CN, LV_OPA_40, 0);
     lv_obj_set_style_text_color(label_CN, lv_color_hex(COLOUR_BLACK), 0);

@@ -309,7 +309,7 @@ static void clock_screen_layer_timer_cb(lv_timer_t *tmr)
     lv_obj_set_style_text_color(tips_label, lv_color_hex(COLOUR_WHITE), 0);
     lv_obj_center(tips_label);
 
-        lv_obj_set_style_text_font(tips_label, &lv_font_montserrat_48, 0);
+        lv_obj_set_style_text_font(tips_label, &ui_font_Number, 0);
         lv_label_set_text(tips_label, "17:09");
 //                            tips_labela = lv_label_create(page);
 //    lv_obj_set_style_text_color(tips_labela, lv_palette_main(LV_PALETTE_DEEP_ORANGE), 0);

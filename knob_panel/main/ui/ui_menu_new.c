@@ -218,7 +218,7 @@ void ui_menu_init(lv_obj_t *parent)
     label_name = lv_label_create(page);
     sys_param_t *param = settings_get_parameter();
     if (LANGUAGE_CN == param->language) {
-        lv_obj_set_style_text_font(label_name, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_name, &HelveticaNeue_Regular_24, 0);
         lv_label_set_text(label_name, menu[app_index].name_CN);
     } else {
         lv_obj_set_style_text_font(label_name, &HelveticaNeue_Regular_24, 0);
@@ -240,7 +240,7 @@ void ui_menu_init(lv_obj_t *parent)
     lv_obj_set_style_text_color(tips_label, lv_color_hex(COLOUR_WHITE), 0);
     lv_obj_center(tips_label);
     if (LANGUAGE_CN == param->language) {
-        lv_obj_set_style_text_font(tips_label, &font_SourceHanSansCN_Medium_22, 0);
+        lv_obj_set_style_text_font(tips_label, &HelveticaNeue_Regular_24, 0);
         lv_label_set_text(tips_label, "已恢复出厂");
     } else {
         lv_obj_set_style_text_font(tips_label, &HelveticaNeue_Regular_24, 0);

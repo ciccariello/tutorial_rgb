@@ -341,27 +341,27 @@ void ui_washing_init(lv_obj_t *parent)
      * create run page
      */
     label_leftTimeH = lv_label_create(page_run);
-    lv_obj_set_style_text_font(label_leftTimeH, &HelveticaNeue_Regular_48, 0);
+    lv_obj_set_style_text_font(label_leftTimeH, &ui_font_Number, 0);
     lv_label_set_text(label_leftTimeH, "12");
     lv_obj_align(label_leftTimeH, LV_ALIGN_CENTER, -30, -20);
 
     label_leftTimeL = lv_label_create(page_run);
-    lv_obj_set_style_text_font(label_leftTimeL, &HelveticaNeue_Regular_48, 0);
+    lv_obj_set_style_text_font(label_leftTimeL, &HelveticaNeue_Regular_24, 0);
     lv_label_set_text(label_leftTimeL, "04");
     lv_obj_align(label_leftTimeL, LV_ALIGN_CENTER, 30, -20);
 
     label_leftTime_unit = lv_label_create(page_run);
-    lv_obj_set_style_text_font(label_leftTime_unit, &HelveticaNeue_Regular_48, 0);
+    lv_obj_set_style_text_font(label_leftTime_unit, &HelveticaNeue_Regular_24, 0);
     lv_label_set_text(label_leftTime_unit, ":");
     lv_obj_align(label_leftTime_unit, LV_ALIGN_CENTER, -8, -23);
 
     lv_obj_t *label_info = lv_label_create(page_run);
     lv_obj_set_style_text_color(label_info, lv_color_hex(COLOUR_GREY_4F), 0);
     if (LANGUAGE_CN == param->language) {
-        lv_obj_set_style_text_font(label_info, &font_SourceHanSansCN_20, 0);
+        lv_obj_set_style_text_font(label_info, &HelveticaNeue_Regular_24, 0);
         lv_label_set_text(label_info, "长按结束");
     } else {
-        lv_obj_set_style_text_font(label_info, &HelveticaNeue_Regular_20, 0);
+        lv_obj_set_style_text_font(label_info, &HelveticaNeue_Regular_24, 0);
         lv_label_set_text(label_info, "long press to end");
     }
     lv_obj_align(label_info, LV_ALIGN_CENTER, 0, 40);

@@ -103,23 +103,23 @@ LV_FONT_DECLARE(font_cn_32);//ç¯å…‰
 LV_FONT_DECLARE(font_cn_48);//æ´—æ¶¤å‰©ä½™æ—¶é—´
 
 /*long press to end*/
-LV_FONT_DECLARE(HelveticaNeue_Regular_20);
-
+//LV_FONT_DECLARE(HelveticaNeue_Regular_24);
+LV_FONT_DECLARE(ui_font_Number);
 /*0x20-0x7F*/
 LV_FONT_DECLARE(HelveticaNeue_Regular_24);
 
 /*0123456789ï¼š-*/
-LV_FONT_DECLARE(HelveticaNeue_Regular_48);
+//LV_FONT_DECLARE(HelveticaNeue_Regular_24);
 
 /*ä¸­æ–‡å·²æ¢å¤å‡ºåŽ‚*/
-LV_FONT_DECLARE(font_SourceHanSansCN_Medium_22);
+//LV_FONT_DECLARE(ui_font_Number);
 
 /*0x20-0x7F*/
 /*
 é•¿æŒ‰ç»“æŸæ´—è¡£æ¨¡å¼æ’æ¸©å™¨ç…§æ˜Žæ¨¡å¼çº¢å¤–èƒŒå…‰å–‡å­ç¼–ç å™¨æˆåŠŸå¤±è´¥å·¦å³æŒ‰ä¸‹
 å±å¹•æ­£å¸¸äº®æš—ä¸‹ä¸€æ­¥å·¦å³æ—‹æŒ‰ä¸‹å±å¹•æ­£å¸¸äº®æš—ä¸‹ä¸€æ­¥è·³å¸½å…ˆæŽ¥åŽå†ç­‰å¾…ç»“æžœ
 */
-LV_FONT_DECLARE(font_SourceHanSansCN_20);
+//LV_FONT_DECLARE(HelveticaNeue_Regular_24);
 
 /**********************
  *      MACROS
