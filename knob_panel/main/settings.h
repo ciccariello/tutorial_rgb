@@ -18,6 +18,8 @@ typedef struct {
     uint8_t magic;
     bool need_hint;
     uint8_t language;
+    uint8_t hour;
+    uint8_t minute;     
 } sys_param_t;
 
 esp_err_t settings_read_parameter_from_nvs(void);

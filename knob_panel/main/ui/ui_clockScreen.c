@@ -5,6 +5,7 @@
  */
 
 #include "lvgl.h"
+#include <stdint.h>
 #include <stdio.h>
 
 #include "misc/lv_area.h"
@@ -310,7 +311,10 @@ static void clock_screen_layer_timer_cb(lv_timer_t *tmr)
     lv_obj_center(tips_label);
 
         lv_obj_set_style_text_font(tips_label, &ui_font_Number, 0);
-        lv_label_set_text(tips_label, "17:09");
+        sys_param_t *param = settings_get_parameter();
+        uint8_t my_val = ( param->hour - 11 );
+lv_label_set_text_fmt(tips_label, "%d:25", my_val);
+//        lv_label_set_text(tips_label, "17:09");
 //                            tips_labela = lv_label_create(page);
 //    lv_obj_set_style_text_color(tips_labela, lv_palette_main(LV_PALETTE_DEEP_ORANGE), 0);
 //

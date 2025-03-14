@@ -12,6 +12,7 @@
 #include "lv_example_pub.h"
 #include "lv_example_image.h"
 #include "app_audio.h"
+#include "settings.h"
 
 static lv_obj_t *temp_arc;
 static lv_obj_t *page;
@@ -61,6 +62,13 @@ static void thermostat_event_cb(lv_event_t *e)
     } else if (LV_EVENT_CLICKED== code) {
 
         lv_indev_wait_release(lv_indev_get_next(NULL));
+        current = lv_arc_get_value(temp_arc);
+        sys_param_t *param = settings_get_parameter();
+        if( current  != param->hour ) 
+         {
+            param->hour = current;
+            settings_write_parameter_to_nvs();
+         }
         audio_handle_info(SOUND_TYPE_KNOB);
         vTaskDelay(pdMS_TO_TICKS(1500));
         ui_remove_all_objs_from_encoder_group();
@@ -146,18 +154,18 @@ void lv_create_obj_roller(lv_obj_t *parent)
     lv_obj_set_style_text_font(temp_wheel, &lv_font_montserrat_48, LV_PART_SELECTED);
 #endif
     lv_roller_set_options(temp_wheel,
-                          "13:35\n"
-                          "13:45\n"
-                          "14:00\n"
-                          "14:30\n"
-                          "14:45\n"
-                          "15:00\n"
-                          "15:30\n"
-                          "16:00\n"
-                          "16:30\n"
-                          "17:00\n"
-                          "17:15\n"
-                          "17:30",
+                          "8\n"
+                          "9\n"
+                          "10\n"
+                          "11\n"
+                          "12\n"
+                          "13\n"
+                          "14\n"
+                          "15\n"
+                          "16\n"
+                          "17\n"
+                          "18\n"
+                          "19",
                           LV_ROLLER_MODE_NORMAL);
 
     lv_obj_align(temp_wheel, LV_ALIGN_CENTER, 5, 10);
@@ -181,7 +189,7 @@ void ui_thermostat_init(lv_obj_t *parent)
 
     lv_obj_t *img_thermostat_temp = lv_img_create(page);
     lv_img_set_src(img_thermostat_temp, &segnale);
-    lv_obj_align(img_thermostat_temp, LV_ALIGN_CENTER, 0, -20);
+    lv_obj_align(img_thermostat_temp, LV_ALIGN_CENTER, -59, -70 );
 
     temp_arc = lv_arc_create(page);
     lv_obj_set_size(temp_arc, LV_HOR_RES - 40, LV_VER_RES - 40);
