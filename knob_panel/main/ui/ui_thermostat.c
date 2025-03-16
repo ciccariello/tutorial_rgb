@@ -73,7 +73,7 @@ static void thermostat_event_cb(lv_event_t *e)
         vTaskDelay(pdMS_TO_TICKS(1500));
         ui_remove_all_objs_from_encoder_group();
 //        lv_create_clock(&clock_screen_layer, TIME_ENTER_CLOCK_2MIN);
-       lv_func_goto_layer(&clock_screen_layer);
+       lv_func_goto_layer(&washing_Layer);
     }
 }
 
