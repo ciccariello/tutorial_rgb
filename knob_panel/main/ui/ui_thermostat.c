@@ -12,6 +12,7 @@
 #include "lv_example_pub.h"
 #include "lv_example_image.h"
 #include "app_audio.h"
+#include "misc/lv_area.h"
 #include "settings.h"
 
 static lv_obj_t *temp_arc;
@@ -22,6 +23,8 @@ static time_out_count time_500ms;
 static bool thermostat_layer_enter_cb(void *layer);
 static bool thermostat_layer_exit_cb(void *layer);
 static void thermostat_layer_timer_cb(lv_timer_t *tmr);
+
+static lv_obj_t  *hour_label;
 
 lv_layer_t thermostat_Layer = {
     .lv_obj_name    = "thermostat_Layer",
@@ -171,6 +174,14 @@ void lv_create_obj_roller(lv_obj_t *parent)
     lv_obj_align(temp_wheel, LV_ALIGN_CENTER, 5, 10);
     lv_roller_set_visible_row_count(temp_wheel, 3);
     lv_obj_add_event_cb(temp_wheel, mask_event_cb, LV_EVENT_ALL, NULL);
+
+    hour_label = lv_label_create(parent);
+    lv_obj_set_style_text_font(hour_label, &HelveticaNeue_Regular_24, 0);
+    lv_obj_set_style_text_color(hour_label, lv_color_hex(COLOUR_WHITE), 0);
+    lv_label_set_text(hour_label, "Hurzeit");
+    lv_obj_align(hour_label, LV_ALIGN_RIGHT_MID, -17, 30);
+
+
 }
 
 void ui_thermostat_init(lv_obj_t *parent)

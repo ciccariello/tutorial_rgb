@@ -46,7 +46,7 @@ static ui_menu_app_t menu[] = {
 //    {"洗衣模式",    "Jalla Habib",     &icon_washing,      &icon_washing_ns,       LV_COLOR_MAKE(36, 163, 235), &washing_Layer},
 
     {"恒温器",      "ANKUNFT",  &segnale,   &reverse,    LV_COLOR_MAKE(36, 163, 235), &thermostat_Layer},
-    {"照明模式",    "PARKING",  &parking,   &parking_ns,   LV_COLOR_MAKE(33, 160, 239), &light_2color_Layer},    
+    {"照明模式",    "RGB Demo",  &parking,   &parking_ns,   LV_COLOR_MAKE(33, 160, 239), &light_2color_Layer},    
 //    {"照明模式",    "Jalla Jalla",       &icon_light,        &icon_light_ns,         LV_COLOR_MAKE(255, 229, 147), &light_2color_Layer},
 };
 

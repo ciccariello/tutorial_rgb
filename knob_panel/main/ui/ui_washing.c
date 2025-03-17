@@ -24,6 +24,8 @@ static bool washing_layer_enter_cb(void *layer);
 static bool washing_layer_exit_cb(void *layer);
 static void washing_layer_timer_cb(lv_timer_t *tmr);
 
+static lv_obj_t  *minute_label;
+
 lv_layer_t washing_Layer = {
     .lv_obj_name    = "washing_Layer",
     .lv_obj_parent  = NULL,
@@ -172,6 +174,13 @@ void create_obj_roller(lv_obj_t *parent)
     lv_obj_align(temp_wheel, LV_ALIGN_CENTER, 5, 10);
     lv_roller_set_visible_row_count(temp_wheel, 3);
     lv_obj_add_event_cb(temp_wheel, mask_event_cb, LV_EVENT_ALL, NULL);
+
+        minute_label = lv_label_create(parent);
+    lv_obj_set_style_text_font(minute_label, &HelveticaNeue_Regular_24, 0);
+    lv_obj_set_style_text_color(minute_label, lv_color_hex(COLOUR_WHITE), 0);
+    lv_label_set_text(minute_label, "Minuten");
+    lv_obj_align(minute_label, LV_ALIGN_RIGHT_MID, -25, 40);
+
 }
 
 void ui_washing_init(lv_obj_t *parent)
@@ -198,7 +207,7 @@ void ui_washing_init(lv_obj_t *parent)
     lv_arc_set_rotation(temp_arc, 180 + (180 - 150) / 2);
     lv_arc_set_bg_angles(temp_arc, 0, 150);
     lv_arc_set_value(temp_arc, param->minute);
-    lv_arc_set_range(temp_arc, 0, 10);
+    lv_arc_set_range(temp_arc, 0, 11);
     lv_obj_set_style_arc_width(temp_arc, 10, LV_PART_MAIN);
     lv_obj_set_style_arc_width(temp_arc, 10, LV_PART_INDICATOR);
 
