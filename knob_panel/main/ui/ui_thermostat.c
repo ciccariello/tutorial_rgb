@@ -56,7 +56,7 @@ static void thermostat_event_cb(lv_event_t *e)
                 }
             }
             lv_arc_set_value(temp_arc, current);
-            lv_roller_set_selected(temp_wheel, (current - 19), LV_ANIM_ON);
+            lv_roller_set_selected(temp_wheel, (current - 8), LV_ANIM_ON);
         }
 
     } else if (LV_EVENT_CLICKED== code) {
@@ -64,7 +64,7 @@ static void thermostat_event_cb(lv_event_t *e)
         lv_indev_wait_release(lv_indev_get_next(NULL));
         current = lv_arc_get_value(temp_arc);
         sys_param_t *param = settings_get_parameter();
-        if( current  != param->hour ) 
+        if( current != param->hour ) 
          {
             param->hour = current;
             settings_write_parameter_to_nvs();
@@ -175,6 +175,7 @@ void lv_create_obj_roller(lv_obj_t *parent)
 
 void ui_thermostat_init(lv_obj_t *parent)
 {
+	sys_param_t *param = settings_get_parameter();
     page = lv_obj_create(parent);
     lv_obj_set_size(page, LV_HOR_RES, LV_VER_RES);
 
@@ -195,8 +196,8 @@ void ui_thermostat_init(lv_obj_t *parent)
     lv_obj_set_size(temp_arc, LV_HOR_RES - 40, LV_VER_RES - 40);
     lv_arc_set_rotation(temp_arc, 180 + (180 - 150) / 2);
     lv_arc_set_bg_angles(temp_arc, 0, 150);
-    lv_arc_set_value(temp_arc, 22);
-    lv_arc_set_range(temp_arc, 19, 30);
+    lv_arc_set_value(temp_arc, (param->hour) );
+    lv_arc_set_range(temp_arc, 8, 19);
     lv_obj_set_style_arc_width(temp_arc, 10, LV_PART_MAIN);
     lv_obj_set_style_arc_width(temp_arc, 10, LV_PART_INDICATOR);
 
@@ -225,7 +226,8 @@ void ui_thermostat_init(lv_obj_t *parent)
 //    lv_obj_align(img_temp_unit, LV_ALIGN_CENTER, 50, -10);
 
     lv_create_obj_roller(parent);
-    lv_roller_set_selected(temp_wheel, (22 - 19), LV_ANIM_ON);
+   
+    lv_roller_set_selected(temp_wheel, ( (param->hour) - 8 ), LV_ANIM_ON);
 
     lv_anim_t a1;
     lv_anim_init(&a1);

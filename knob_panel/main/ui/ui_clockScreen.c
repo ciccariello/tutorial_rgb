@@ -209,7 +209,7 @@ static void clock_screen_layer_timer_cb(lv_timer_t *tmr)
   {
    int incColour = decColour == 2 ? 0 : decColour + 1;
    
-    for(int i = 0; i < 127; i += 1) {
+    for(int i = 0; i < 5; i += 1) {
    // cross-fade the two colours.
      rgbColour[decColour] -= 2;
      rgbColour[incColour] += 2;
@@ -312,8 +312,8 @@ static void clock_screen_layer_timer_cb(lv_timer_t *tmr)
 
         lv_obj_set_style_text_font(tips_label, &ui_font_Number, 0);
         sys_param_t *param = settings_get_parameter();
-        uint8_t my_val_hour   = ( param->hour - 11 );
-        uint8_t my_val_minute = (( param->minute - 19 ) * 5 );
+        uint8_t my_val_hour   = ( param->hour );
+        uint8_t my_val_minute = (( param->minute ) * 5 );
 lv_label_set_text_fmt(tips_label, "%d:%02d", my_val_hour, my_val_minute );
 //        lv_label_set_text(tips_label, "17:09");
 //                            tips_labela = lv_label_create(page);
