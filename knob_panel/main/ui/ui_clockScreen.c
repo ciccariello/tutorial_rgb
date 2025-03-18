@@ -79,7 +79,7 @@ void ui_flash_face_init(lv_obj_t *parent)
 {
 	page = lv_obj_create(parent);
 	    lv_obj_set_size(page, LV_HOR_RES, LV_VER_RES);
-    lv_obj_set_style_border_width(page, 5, 0);
+    lv_obj_set_style_border_width(page, 3, 0);
     lv_obj_set_style_border_color(page,  lv_color_make(33, 163, 235), 0);
     lv_obj_set_style_radius(page, LV_RADIUS_CIRCLE, 0);
     lv_obj_clear_flag(page, LV_OBJ_FLAG_SCROLLABLE);
