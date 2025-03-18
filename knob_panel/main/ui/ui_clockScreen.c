@@ -9,6 +9,7 @@
 #include <stdio.h>
 
 #include "misc/lv_area.h"
+#include "misc/lv_color.h"
 #include "settings.h"
 #include "app_audio.h"
 #include <math.h>
@@ -121,7 +122,7 @@ void ui_flash_face_init(lv_obj_t *parent)
 //    lv_obj_align(img_eye_right, LV_ALIGN_TOP_RIGHT, 163, 105);
 //
     img_eye_left = lv_img_create(page);
-    lv_img_set_src(img_eye_left, &jojo);
+    lv_img_set_src(img_eye_left, &jojo7);
     lv_obj_align(img_eye_left, LV_ALIGN_CENTER, 0, 0);
     img_eye_right = lv_img_create(parent);
     lv_img_set_src(img_eye_right, &segnale);
@@ -131,7 +132,7 @@ void ui_flash_face_init(lv_obj_t *parent)
     lv_anim_set_var(&a, img_eye_right);
     lv_anim_set_time(&a, 2500);
     lv_anim_set_exec_cb(&a, set_mouth_zoom);
-    lv_anim_set_values(&a, 168, 296);
+    lv_anim_set_values(&a, 144, 312);
     lv_anim_set_playback_time(&a, 3500);
     lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
     lv_anim_start(&a);
@@ -307,8 +308,9 @@ static void clock_screen_layer_timer_cb(lv_timer_t *tmr)
                 flash_sub_step = 0;
                 flash_main_step += 1;
                     tips_label = lv_label_create(page);
-    lv_obj_set_style_text_color(tips_label, lv_color_hex(COLOUR_WHITE), 0);
-    lv_obj_center(tips_label);
+    lv_obj_set_style_text_color(tips_label, lv_color_make(0xFF, 0xFF, 0xFF), 0);
+    lv_obj_align(tips_label, LV_ALIGN_CENTER, 3, 4);
+//    lv_obj_center(tips_label);
 
         lv_obj_set_style_text_font(tips_label, &ui_font_Number, 0);
         sys_param_t *param = settings_get_parameter();

@@ -13,6 +13,7 @@
 #include "lv_example_image.h"
 #include "app_audio.h"
 #include "misc/lv_area.h"
+#include "misc/lv_color.h"
 #include "settings.h"
 
 static lv_obj_t *temp_arc;
@@ -179,7 +180,7 @@ void lv_create_obj_roller(lv_obj_t *parent)
     lv_obj_set_style_text_font(hour_label, &HelveticaNeue_Regular_24, 0);
     lv_obj_set_style_text_color(hour_label, lv_color_hex(COLOUR_WHITE), 0);
     lv_label_set_text(hour_label, "Hurzeit");
-    lv_obj_align(hour_label, LV_ALIGN_RIGHT_MID, -17, 30);
+    lv_obj_align(hour_label, LV_ALIGN_RIGHT_MID, -16, 33);
 
 
 }
@@ -190,14 +191,21 @@ void ui_thermostat_init(lv_obj_t *parent)
     page = lv_obj_create(parent);
     lv_obj_set_size(page, LV_HOR_RES, LV_VER_RES);
 
-    lv_obj_set_style_border_width(page, 0, 0);
-    lv_obj_set_style_radius(page, 0, 0);
+//    lv_obj_set_style_border_width(page, 0, 0);
+//    lv_obj_set_style_radius(page, 0, 0);
+//    lv_obj_clear_flag(page, LV_OBJ_FLAG_SCROLLABLE);
+//    lv_obj_center(page);
+    
+    lv_obj_set_style_border_width(page, 5, 0);
+    lv_obj_set_style_border_color(page,  lv_color_make(33, 163, 235), 0);
+    lv_obj_set_style_radius(page, LV_RADIUS_CIRCLE, 0);
     lv_obj_clear_flag(page, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_center(page);
-
-    lv_obj_t *img_thermostat_bg = lv_img_create(page);
-    lv_img_set_src(img_thermostat_bg, &AC_BG);
-    lv_obj_align(img_thermostat_bg, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_refr_size(page);
+    
+//    lv_obj_t *img_thermostat_bg = lv_img_create(page);
+//    lv_img_set_src(img_thermostat_bg, &AC_BG);
+//    lv_obj_align(img_thermostat_bg, LV_ALIGN_CENTER, 0, 0);
 
     lv_obj_t *img_thermostat_temp = lv_img_create(page);
     lv_img_set_src(img_thermostat_temp, &segnale);

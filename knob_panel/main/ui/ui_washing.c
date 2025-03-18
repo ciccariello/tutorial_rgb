@@ -179,7 +179,7 @@ void create_obj_roller(lv_obj_t *parent)
     lv_obj_set_style_text_font(minute_label, &HelveticaNeue_Regular_24, 0);
     lv_obj_set_style_text_color(minute_label, lv_color_hex(COLOUR_WHITE), 0);
     lv_label_set_text(minute_label, "Minuten");
-    lv_obj_align(minute_label, LV_ALIGN_RIGHT_MID, -25, 40);
+    lv_obj_align(minute_label, LV_ALIGN_RIGHT_MID, -22, 39);
 
 }
 
@@ -189,14 +189,16 @@ void ui_washing_init(lv_obj_t *parent)
  page = lv_obj_create(parent);
     lv_obj_set_size(page, LV_HOR_RES, LV_VER_RES);
 
-    lv_obj_set_style_border_width(page, 0, 0);
-    lv_obj_set_style_radius(page, 0, 0);
+    lv_obj_set_style_border_width(page, 5, 0);
+    lv_obj_set_style_border_color(page,  lv_color_make(33, 163, 235), 0);
+    lv_obj_set_style_radius(page, LV_RADIUS_CIRCLE, 0);
     lv_obj_clear_flag(page, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_center(page);
+    lv_obj_refr_size(page);
 
-    lv_obj_t *img_thermostat_bg = lv_img_create(page);
-    lv_img_set_src(img_thermostat_bg, &AC_BG);
-    lv_obj_align(img_thermostat_bg, LV_ALIGN_CENTER, 0, 0);
+//    lv_obj_t *img_thermostat_bg = lv_img_create(page);
+//    lv_img_set_src(img_thermostat_bg, &AC_BG);
+//    lv_obj_align(img_thermostat_bg, LV_ALIGN_CENTER, 0, 0);
 
     lv_obj_t *img_thermostat_temp = lv_img_create(page);
     lv_img_set_src(img_thermostat_temp, &segnale);

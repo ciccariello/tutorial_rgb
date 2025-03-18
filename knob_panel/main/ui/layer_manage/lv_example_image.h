@@ -79,13 +79,14 @@ LV_IMG_DECLARE(AC_unit);
 //LV_IMG_DECLARE(standby_eye_2);
 //LV_IMG_DECLARE(standby_eye_close);
 ////LV_IMG_DECLARE(standby_face);
-LV_IMG_DECLARE(jojo);
+//LV_IMG_DECLARE(jojo);
 LV_IMG_DECLARE(park);
 LV_IMG_DECLARE(segnale);
 LV_IMG_DECLARE(segnale_ns);
 LV_IMG_DECLARE(parking);
 LV_IMG_DECLARE(parking_ns);
 LV_IMG_DECLARE(reverse);
+LV_IMG_DECLARE(jojo7);
 //LV_IMG_DECLARE(standby_eye_1_fade);
 //LV_IMG_DECLARE(standby_eye_3);
 //LV_IMG_DECLARE(standby_eye_open);
@@ -99,8 +100,8 @@ LV_IMG_DECLARE(language_unselect);
 /********************************
  * font
 ********************************/
-LV_FONT_DECLARE(font_cn_32);//ç¯å…‰
-LV_FONT_DECLARE(font_cn_48);//æ´—æ¶¤å‰©ä½™æ—¶é—´
+//LV_FONT_DECLARE(font_cn_32);//ç¯å…‰
+//LV_FONT_DECLARE(font_cn_48);//æ´—æ¶¤å‰©ä½™æ—¶é—´
 
 /*long press to end*/
 //LV_FONT_DECLARE(HelveticaNeue_Regular_24);
