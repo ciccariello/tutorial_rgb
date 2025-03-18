@@ -86,7 +86,7 @@ LV_IMG_DECLARE(segnale_ns);
 LV_IMG_DECLARE(parking);
 LV_IMG_DECLARE(parking_ns);
 LV_IMG_DECLARE(reverse);
-LV_IMG_DECLARE(jojo7);
+LV_IMG_DECLARE(jojo8);
 //LV_IMG_DECLARE(standby_eye_1_fade);
 //LV_IMG_DECLARE(standby_eye_3);
 //LV_IMG_DECLARE(standby_eye_open);

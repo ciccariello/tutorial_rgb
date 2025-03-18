@@ -79,14 +79,12 @@ void ui_flash_face_init(lv_obj_t *parent)
 {
 	page = lv_obj_create(parent);
 	    lv_obj_set_size(page, LV_HOR_RES, LV_VER_RES);
-	lv_obj_set_style_bg_color(page, lv_color_hex(0x030102), 0);    
-//    lv_obj_set_style_border_width(page, 6, 0);
-//    lv_obj_set_style_border_color(page, lv_palette_main(LV_PALETTE_DEEP_ORANGE), 0);
-//    
-//    lv_obj_set_style_radius(page, LV_RADIUS_CIRCLE, 0);
-//    
-//    lv_obj_clear_flag(page, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_set_style_border_width(page, 5, 0);
+    lv_obj_set_style_border_color(page,  lv_color_make(33, 163, 235), 0);
+    lv_obj_set_style_radius(page, LV_RADIUS_CIRCLE, 0);
+    lv_obj_clear_flag(page, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_center(page);
+    lv_obj_refr_size(page);
 	
 	
 //	        img_eye_right = lv_img_create( page );
@@ -122,7 +120,7 @@ void ui_flash_face_init(lv_obj_t *parent)
 //    lv_obj_align(img_eye_right, LV_ALIGN_TOP_RIGHT, 163, 105);
 //
     img_eye_left = lv_img_create(page);
-    lv_img_set_src(img_eye_left, &jojo7);
+    lv_img_set_src(img_eye_left, &jojo8);
     lv_obj_align(img_eye_left, LV_ALIGN_CENTER, 0, 0);
     img_eye_right = lv_img_create(parent);
     lv_img_set_src(img_eye_right, &segnale);
@@ -309,7 +307,7 @@ static void clock_screen_layer_timer_cb(lv_timer_t *tmr)
                 flash_main_step += 1;
                     tips_label = lv_label_create(page);
     lv_obj_set_style_text_color(tips_label, lv_color_make(0xFF, 0xFF, 0xFF), 0);
-    lv_obj_align(tips_label, LV_ALIGN_CENTER, 3, 4);
+    lv_obj_align(tips_label, LV_ALIGN_CENTER, 3, 2);
 //    lv_obj_center(tips_label);
 
         lv_obj_set_style_text_font(tips_label, &ui_font_Number, 0);
