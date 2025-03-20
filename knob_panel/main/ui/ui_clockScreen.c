@@ -67,7 +67,8 @@ static void wakeup_event_cb(lv_event_t *e)
 
 static void set_mouth_zoom(void *img, int32_t v)
 {
-    if (2 == flash_main_step) {
+    if (2 == flash_main_step) 
+     {
         lv_img_set_zoom(img, v);
         if (MIN_MOUTH_ZOOM == v) {
             // audio_continue_next();
@@ -191,30 +192,29 @@ static bool clock_screen_layer_exit_cb(void *layer)
 //    }
 //}
 
-static void clock_screen_layer_timer_cb(lv_timer_t *tmr)
+static void clock_screen_layer_timer_cb( lv_timer_t *tmr )
 {
-//    static lv_anim_t anim_eye;
+
     feed_clock_time();
-    if (is_time_out(&time_50ms)) {
-		
-		
-//		uint8_t rgbColour[3];
-// // Start off with red.
-// rgbColour[0] = 255;
-// rgbColour[1] = 0;
-// rgbColour[2] = 0;  
- // Choose the colours to increment and decrement.
- for (int decColour = 0; decColour < 3; decColour += 1) 
-  {
-   int incColour = decColour == 2 ? 0 : decColour + 1;
-   
-    for(int i = 0; i < 5; i += 1) {
-   // cross-fade the two colours.
-     rgbColour[decColour] -= 2;
-     rgbColour[incColour] += 2;
-     bsp_led_rgb_set( 0x00,  rgbColour[1],  rgbColour[2]);
-  }
-  }		
+    
+    if( is_time_out(&time_50ms) ) 
+     {
+		          rgbColour[0] -= 25;
+                  rgbColour[1] += 25;
+                  rgbColour[1] += 15;
+                  bsp_led_rgb_set( 0x00,  rgbColour[1],  rgbColour[2]);
+//        for( int decColour = 0; decColour < 3; decColour += 1) 
+//         {
+//             int incColour = decColour == 2 ? 0 : decColour + 1;
+//   
+////             for( int i = 0; i < 5; i += 1 ) 
+////              {
+//                  // cross-fade the two colours.
+//                  rgbColour[decColour] -= 25;
+//                  rgbColour[incColour] += 25;
+//                  bsp_led_rgb_set( 0x00,  rgbColour[1],  rgbColour[2]);
+////              }
+//         }		
 		
 //		counter++;
 ////			            float angle = ( 2.2 * flash_main_step );
@@ -223,117 +223,68 @@ static void clock_screen_layer_timer_cb(lv_timer_t *tmr)
 //              green = sin(color_off) * 150 + 12;
 //              
 //              blue = sin(color_off) * 150 + 12;
-        switch (flash_main_step) {
+        switch( flash_main_step ) 
+        {
 
         case 0:
-            if (0 == flash_sub_step) {
-				
-//				    float offset = 0;
-//    while (1) {
-//        for (int led = 0; led < EXAMPLE_LED_NUMBERS; led++) {
-//            // Build RGB pixels. Each color is an offset sine, which gives a
-//            // hue-like effect.
-//            float angle = ( 2.2 * flash_main_step );
-//            const float color_off = (M_PI * 2) / 3;
-//              red   = sin(angle + color_off * 0) * 127 + 128;
-//              green = sin(angle + color_off * 1) * 127 + 128;
-//              
-//              blue = sin(angle + color_off * 2) * 117 + 128;
-//        }
-//        // Flush RGB values to LEDs
-//        ESP_ERROR_CHECK(rmt_transmit(led_chan, simple_encoder, led_strip_pixels, sizeof(led_strip_pixels), &tx_config));
-//        ESP_ERROR_CHECK(rmt_tx_wait_all_done(led_chan, portMAX_DELAY));
-//        vTaskDelay(pdMS_TO_TICKS(EXAMPLE_FRAME_DURATION_MS));
-//        //Increase offset to shift pattern
-//        offset += EXAMPLE_ANGLE_INC_FRAME;
-//        if (offset > 2 * M_PI) {
-//            offset -= 2 * M_PI;
-//        }
-//    }
-//				  bsp_led_rgb_set( rgbColour[0],  rgbColour[1],  rgbColour[2]);
-//                lv_img_set_src(img_eye_bg, &segnale);
-//                lv_obj_align(img_eye_bg, LV_ALIGN_CENTER, 0, 0);
-//
-//                lv_obj_align(img_eye_left, LV_ALIGN_TOP_LEFT, 75, 100);
-//                lv_obj_align(img_eye_right, LV_ALIGN_TOP_LEFT, 115, 100);
-//
-//                lv_obj_clear_flag(img_eye_left, LV_OBJ_FLAG_HIDDEN);
-//                lv_obj_clear_flag(img_eye_right, LV_OBJ_FLAG_HIDDEN);
-//                lv_obj_add_flag(img_eye, LV_OBJ_FLAG_HIDDEN);
-//
-//                lv_anim_init(&anim_eye);
-//                lv_anim_set_var(&anim_eye, img_eye_left);
-//                lv_anim_set_delay(&anim_eye, 0);
-//                lv_anim_set_path_cb(&anim_eye, lv_anim_path_ease_in_out);
-//                lv_anim_set_time(&anim_eye, 3500);
-//                lv_anim_set_playback_time(&anim_eye, 2000);
-//                lv_anim_set_repeat_count(&anim_eye, LV_ANIM_REPEAT_INFINITE);
-//
-//                lv_anim_set_values(&anim_eye, lv_obj_get_x_aligned(img_eye_left) + 0, lv_obj_get_x_aligned(img_eye_left) - 50);
-//                lv_anim_set_exec_cb(&anim_eye, set_anim_left_eye);
-//                lv_anim_start(&anim_eye);
-//
-//                lv_anim_set_values(&anim_eye, lv_obj_get_x_aligned(img_eye_right) + 0, lv_obj_get_x_aligned(img_eye_right) + 50);
-//                lv_anim_set_exec_cb(&anim_eye, set_anim_right_eye);
-//                lv_anim_start(&anim_eye);
+        
+            if( 0 == flash_sub_step ) 
+             {				
                 flash_sub_step += 1;
-            } else {
-                if (flash_sub_step++ < 80) { //0-400
-                    if ((flash_sub_step / 50) % 2) {
-//                        lv_obj_clear_flag(img_eye_fade, LV_OBJ_FLAG_HIDDEN);
-                    } else {
-//                        lv_obj_add_flag(img_eye_fade, LV_OBJ_FLAG_HIDDEN);
-                    }
-                } else {
+             } 
+            else
+             {
+                if( flash_sub_step++ > 10 ) 
+                 { 
                     flash_sub_step = 0;
                     flash_main_step += 1;
-                }
-            }
+                 } 
+             }
+            
             break;
+           
         case 1:
-            if (0 == flash_sub_step) {
+        
+            if( 0 == flash_sub_step ) 
+             {
 //                lv_img_set_src(img_eye_bg, &standby_eye_open);
 //                lv_img_set_src(img_eye, &standby_eye_2);
 //                lv_obj_align(img_eye_bg, LV_ALIGN_CENTER, 0, 0);
 //                lv_obj_align(img_eye, LV_ALIGN_CENTER, 0, 0);
-//
+                  bsp_led_rgb_set( 0x99,  0x33,  0x66);
 //                lv_obj_add_flag(img_eye_fade, LV_OBJ_FLAG_HIDDEN);
 //                lv_obj_add_flag(img_eye_left, LV_OBJ_FLAG_HIDDEN);
 //                lv_obj_add_flag(img_eye_right, LV_OBJ_FLAG_HIDDEN);
 //                lv_obj_clear_flag(img_eye, LV_OBJ_FLAG_HIDDEN);
-            }
-            if (flash_sub_step++ > 40) { //0-4000
+             }
+             
+            if( flash_sub_step++ > 5 ) 
+             {
                 flash_sub_step = 0;
                 flash_main_step += 1;
-                    tips_label = lv_label_create(page);
-    lv_obj_set_style_text_color(tips_label, lv_color_make(0xFF, 0xFF, 0xFF), 0);
-    lv_obj_align(tips_label, LV_ALIGN_CENTER, 3, 2);
-//    lv_obj_center(tips_label);
-
-        lv_obj_set_style_text_font(tips_label, &ui_font_Number, 0);
-        sys_param_t *param = settings_get_parameter();
-        uint8_t my_val_hour   = ( param->hour );
-        uint8_t my_val_minute = (( param->minute ) * 5 );
-lv_label_set_text_fmt(tips_label, "%d:%02d", my_val_hour, my_val_minute );
-//        lv_label_set_text(tips_label, "17:09");
-//                            tips_labela = lv_label_create(page);
-//    lv_obj_set_style_text_color(tips_labela, lv_palette_main(LV_PALETTE_DEEP_ORANGE), 0);
-//
-//        lv_obj_set_style_text_font(tips_labela, &HelveticaNeue_Regular_24, 0);
-//        lv_label_set_text(tips_labela, "Ankunftzeit");
-//            lv_obj_set_width(tips_labela, 150);  /*Set smaller width to make the lines wrap*/
-//    lv_obj_set_style_text_align(tips_labela, LV_TEXT_ALIGN_CENTER, 0);
-//    lv_obj_align(tips_labela, LV_ALIGN_BOTTOM_MID, 0, -30);
-                 audio_handle_info(SOUND_TYPE_WASH_END_CN);
-            }
+                tips_label = lv_label_create(page);
+                lv_obj_set_style_text_color(tips_label, lv_color_make(0xFF, 0xFF, 0xFF), 0);
+                lv_obj_align(tips_label, LV_ALIGN_CENTER, 3, 2);
+                lv_obj_set_style_text_font(tips_label, &ui_font_Number, 0);
+               
+                sys_param_t *param    = settings_get_parameter();
+                uint8_t my_val_hour   = ( param->hour );
+                uint8_t my_val_minute = ( ( param->minute ) * 5 );
+                lv_label_set_text_fmt(tips_label, "%d:%02d", my_val_hour, my_val_minute );
+        
+                audio_handle_info(SOUND_TYPE_WASH_END_CN);
+             }
+             
             break;
+            
         case 2:
-            if (0 == flash_sub_step) {
+            if (0 == flash_sub_step) 
+             {
 //                lv_img_set_src(img_eye_bg, &standby_eye_close);
 //                lv_img_set_src(img_eye, &standby_eye_3);
 //                lv_obj_align(img_eye_bg, LV_ALIGN_CENTER, 0, 0);
 //                lv_obj_align(img_eye, LV_ALIGN_CENTER, 0, 0 + 5);
-            }
+             }
             break;
         }
     }

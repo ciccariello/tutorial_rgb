@@ -4,20 +4,27 @@
  * SPDX-License-Identifier: CC0-1.0
  */
 
+//#include "core/lv_event.h"
 #include "lvgl.h"
 #include <stdio.h>
+
 
 #include "lv_example_pub.h"
 #include "lv_example_image.h"
 #include "bsp/esp-bsp.h"
 #include "app_audio.h"
 #include "misc/lv_color.h"
+#include "widgets/lv_slider.h"
+
+static lv_obj_t * create_slider(lv_color_t color);
 
 static bool light_2color_layer_enter_cb(void *layer);
 static bool light_2color_layer_exit_cb(void *layer);
 static void light_2color_layer_timer_cb(lv_timer_t *tmr);
 static uint8_t colour = 126;
-lv_obj_t * led1, * led2, * led3, * led4;  
+//lv_obj_t * led1, * led2, * led3, * led4; 
+static lv_obj_t * red_slider, * green_slider, * blue_slider, * intense_slider;
+ 
 typedef enum {
     LIGHT_CCK_WARM,
     LIGHT_CCK_COOL,
@@ -71,22 +78,36 @@ static void light_2color_event_cb(lv_event_t *e)
     } else if (LV_EVENT_KEY == code) {
         uint32_t key = lv_event_get_key(e);
         if (is_time_out(&time_500ms)) {
-            if (LV_KEY_RIGHT == key) {
-                if (light_set_conf.light_pwm < 100) {
+            if (LV_KEY_RIGHT == key)
+             {
+//                colour += 63;				
+//                lv_slider_set_value( red_slider, colour, false);
+ 				
+                if( light_set_conf.light_pwm < 100 ) 
+                {
                     light_set_conf.light_pwm += 25;
+                    lv_slider_set_value( red_slider, light_set_conf.light_pwm * 2, false);
                     colour += 63; 
                 }
-            } else if (LV_KEY_LEFT == key) {
-                if (light_set_conf.light_pwm > 0) {
+            } 
+           else if (LV_KEY_LEFT == key) 
+            {
+//                colour -= 63;				
+//			    lv_slider_set_value( red_slider, colour, false);
+// 	
+                if( light_set_conf.light_pwm > 0 ) 
+                 {
                     light_set_conf.light_pwm -= 25;
+                    lv_slider_set_value( red_slider, light_set_conf.light_pwm * 2, false);
                     colour -= 63; 
-                }
+                 }
             }
         }
      } 
     else if( LV_EVENT_CLICKED == code ) 
      {                                 // if is true returns LIGHT_CCK_COOL else it returns LIGHT_CCK_WARM , is a toggler
         light_set_conf.light_cck = ( LIGHT_CCK_WARM == light_set_conf.light_cck ) ? (LIGHT_CCK_COOL) : (LIGHT_CCK_WARM);
+        lv_slider_set_value( red_slider, light_set_conf.light_pwm * 1, false);
      } 
     else if( LV_EVENT_LONG_PRESSED == code ) 
      {
@@ -147,42 +168,61 @@ void ui_light_2color_init(lv_obj_t *parent)
     lv_img_set_src(img_light_pwm_100, &light_warm_100);
     lv_obj_add_flag(img_light_pwm_100, LV_OBJ_FLAG_HIDDEN);
     lv_obj_align(img_light_pwm_100, LV_ALIGN_TOP_MID, 0, 0);
- led1 = lv_led_create(lv_scr_act());
-lv_obj_align(led1, LV_ALIGN_CENTER, 0, -82);
-lv_led_set_brightness(led1, 255);
-lv_led_set_color(led1, lv_color_make(colour , 0x0, 0x0));
-lv_led_on(led1);
+    
 
-/*Copy the previous LED and set a brightness*/
- led2 = lv_led_create(lv_scr_act());
-lv_obj_align(led2, LV_ALIGN_CENTER, 0, -50);
-lv_led_set_brightness(led2, 255);
-lv_led_set_color(led2, lv_color_make( 0x0,colour , 0x0));
-lv_led_on(led2);
-
-/*Copy the previous LED and set a brightness*/
- led3 = lv_led_create(lv_scr_act());
-lv_obj_align(led3, LV_ALIGN_CENTER, 0, -18);
-lv_led_set_brightness(led3, 255);
-lv_led_set_color(led3, lv_color_make( 0x0, 0x0,colour ));
-lv_led_on(led3);
-
-/*Copy the previous LED and set a brightness*/
- led4 = lv_led_create(lv_scr_act());
-lv_obj_align(led4, LV_ALIGN_CENTER, 0, 16);
-lv_led_set_brightness(led4, 255);
-lv_led_set_color(led4, lv_color_make(colour , colour ,colour ));
-lv_led_on(led4);
+//    red_slider = lv_slider_create(page);
+//    lv_slider_set_range(red_slider, 0, 255);
+//    lv_obj_set_size(red_slider, 10, 200);
+//    lv_obj_set_style_bg_color(red_slider, lv_palette_main(LV_PALETTE_RED), LV_PART_KNOB);
+//    lv_obj_set_style_bg_color(red_slider, lv_color_darken(lv_palette_main(LV_PALETTE_RED), LV_OPA_40), LV_PART_INDICATOR);    
+    red_slider = create_slider(lv_palette_main(LV_PALETTE_RED));
+        
+        
+    lv_slider_set_value(red_slider, LV_OPA_20, LV_ANIM_OFF);
+    
+    lv_obj_align(red_slider, LV_ALIGN_LEFT_MID, 8, -30);
+// led1 = lv_led_create(lv_scr_act());
+//lv_obj_align(led1, LV_ALIGN_CENTER, 0, -82);
+//lv_led_set_brightness(led1, 255);
+//lv_led_set_color(led1, lv_color_make(colour , 0x0, 0x0));
+//lv_led_on(led1);
+//
+///*Copy the previous LED and set a brightness*/
+// led2 = lv_led_create(lv_scr_act());
+//lv_obj_align(led2, LV_ALIGN_CENTER, 0, -50);
+//lv_led_set_brightness(led2, 255);
+//lv_led_set_color(led2, lv_color_make( 0x0,colour , 0x0));
+//lv_led_on(led2);
+//
+///*Copy the previous LED and set a brightness*/
+// led3 = lv_led_create(lv_scr_act());
+//lv_obj_align(led3, LV_ALIGN_CENTER, 0, -18);
+//lv_led_set_brightness(led3, 255);
+//lv_led_set_color(led3, lv_color_make( 0x0, 0x0,colour ));
+//lv_led_on(led3);
+//
+///*Copy the previous LED and set a brightness*/
+// led4 = lv_led_create(lv_scr_act());
+//lv_obj_align(led4, LV_ALIGN_CENTER, 0, 16);
+//lv_led_set_brightness(led4, 255);
+//lv_led_set_color(led4, lv_color_make(colour , colour ,colour ));
+//lv_led_on(led4);
     
 
 
 
 
     lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_FOCUSED, NULL);
-    lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_KEY, NULL);
+//    lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_KEY, NULL);
     lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_LONG_PRESSED, NULL);
     lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_CLICKED, NULL);
-    ui_add_obj_to_encoder_group(page);
+    ui_add_obj_to_encoder_group(page);    
+    
+//    lv_obj_add_event_cb(red_slider, light_2color_event_cb, LV_EVENT_CLICKED, NULL);
+//    lv_obj_add_event_cb(red_slider, light_2color_event_cb, LV_EVENT_KEY, NULL);
+//  
+//    ui_add_obj_to_encoder_group(red_slider);    
+
 }
 
 
@@ -261,12 +301,16 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
             case 100:
                 lv_obj_clear_flag(img_light_pwm_100, LV_OBJ_FLAG_HIDDEN);
                 lv_img_set_src(img_light_pwm_100, light_image.img_pwm_100[cck_set]);
+                lv_obj_set_style_img_recolor_opa(img_light_pwm_100, 128, 0);
+                lv_obj_set_style_img_recolor( img_light_pwm_100, lv_color_make(0xFF,0x00,0x00), 0 );
             case 75:
                 lv_obj_clear_flag(img_light_pwm_75, LV_OBJ_FLAG_HIDDEN);
                 lv_img_set_src(img_light_pwm_75, light_image.img_pwm_75[cck_set]);
             case 50:
                 lv_obj_clear_flag(img_light_pwm_50, LV_OBJ_FLAG_HIDDEN);
                 lv_img_set_src(img_light_pwm_50, light_image.img_pwm_50[cck_set]);
+                lv_obj_set_style_img_recolor_opa(img_light_pwm_50, 255, 0);
+                lv_obj_set_style_img_recolor( img_light_pwm_50, lv_color_make(0x00,0xFF,0x00), 0 );
             case 25:
                 lv_obj_clear_flag(img_light_pwm_25, LV_OBJ_FLAG_HIDDEN);
                 lv_img_set_src(img_light_pwm_25, light_image.img_pwm_25[cck_set]);
@@ -275,6 +319,7 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
             case 0:
                 lv_obj_clear_flag(img_light_pwm_0, LV_OBJ_FLAG_HIDDEN);
                 lv_img_set_src(img_light_bg, &light_close_bg);
+
                 audio_handle_info(SOUND_TYPE_SNORE );               
                 break;
             default:
@@ -282,25 +327,25 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
             
              }
              
-              bsp_led_rgb_set( 0x00,colour, 0x00 );        
+              bsp_led_rgb_set(colour,0x00, 0x00 );        
         /*Copy the previous LED and set a brightness*/
-lv_led_set_color(led1, lv_color_make(colour , 0x0, 0x0));
-//lv_led_on(led1);
-
-/*Copy the previous LED and set a brightness*/
-
-lv_led_set_color(led2, lv_color_make( 0x0,colour , 0x0));
-lv_led_on(led2);
-
-/*Copy the previous LED and set a brightness*/
-
-lv_led_set_color(led3, lv_color_make( 0x0, 0x0,colour ));
-//lv_led_on(led3);
-
-/*Copy the previous LED and set a brightness*/
-
-lv_led_set_color(led4, lv_color_make(0x00 , colour ,0x00 ));
-lv_led_on(led4);            
+//lv_led_set_color(led1, lv_color_make(colour , 0x0, 0x0));
+////lv_led_on(led1);
+//
+///*Copy the previous LED and set a brightness*/
+//
+//lv_led_set_color(led2, lv_color_make( 0x0,colour , 0x0));
+//lv_led_on(led2);
+//
+///*Copy the previous LED and set a brightness*/
+//
+//lv_led_set_color(led3, lv_color_make( 0x0, 0x0,colour ));
+////lv_led_on(led3);
+//
+///*Copy the previous LED and set a brightness*/
+//
+//lv_led_set_color(led4, lv_color_make(0x00 , colour ,0x00 ));
+//lv_led_on(led4);            
        
         }
         
@@ -308,3 +353,21 @@ lv_led_on(led4);
 
     }
 }
+
+static lv_obj_t * create_slider(lv_color_t color)
+{
+    lv_obj_t * slider = lv_slider_create(lv_scr_act());
+    lv_slider_set_range(slider, 0, 255);
+    lv_obj_set_size(slider, 200, 10);
+    lv_obj_set_style_bg_color(slider, color, LV_PART_KNOB);
+    lv_obj_set_style_bg_color(slider, lv_color_darken(color, LV_OPA_40), LV_PART_INDICATOR);
+//    lv_event_send(slider, LV_EVENT_VALUE_CHANGED, NULL);
+//    lv_event_send(slider, LV_EVENT_KEY, NULL);
+    lv_obj_add_event_cb(slider, light_2color_event_cb, LV_EVENT_FOCUSED, NULL);
+//    lv_obj_add_event_cb(slider, light_2color_event_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_add_event_cb(slider, light_2color_event_cb, LV_EVENT_KEY, NULL);
+//    lv_obj_add_event_cb(slider, light_2color_event_cb, LV_EVENT_LONG_PRESSED, NULL);
+    ui_add_obj_to_encoder_group(slider); 
+    return slider;
+}
+
