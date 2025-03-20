@@ -213,7 +213,7 @@ void ui_light_2color_init(lv_obj_t *parent)
 
 
     lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_FOCUSED, NULL);
-//    lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_KEY, NULL);
+    lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_KEY, NULL);
     lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_LONG_PRESSED, NULL);
     lv_obj_add_event_cb(page, light_2color_event_cb, LV_EVENT_CLICKED, NULL);
     ui_add_obj_to_encoder_group(page);    
@@ -364,7 +364,7 @@ static lv_obj_t * create_slider(lv_color_t color)
 //    lv_event_send(slider, LV_EVENT_VALUE_CHANGED, NULL);
 //    lv_event_send(slider, LV_EVENT_KEY, NULL);
     lv_obj_add_event_cb(slider, light_2color_event_cb, LV_EVENT_FOCUSED, NULL);
-//    lv_obj_add_event_cb(slider, light_2color_event_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_add_event_cb(slider, light_2color_event_cb, LV_EVENT_CLICKED, NULL);
     lv_obj_add_event_cb(slider, light_2color_event_cb, LV_EVENT_KEY, NULL);
 //    lv_obj_add_event_cb(slider, light_2color_event_cb, LV_EVENT_LONG_PRESSED, NULL);
     ui_add_obj_to_encoder_group(slider); 
