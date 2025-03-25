@@ -115,15 +115,20 @@ static void light_2color_event_cb(lv_event_t *e)
 //                    light_set_conf.light_pwm -= 25;
 ////                    lv_slider_set_value( red_slider, light_set_conf.light_pwm * 2, false);
 ////                    colour -= 63; 
-//                 }
+//             
+//    }
             }
+    char buf2[8];
+    lv_snprintf(buf2, sizeof(buf2), "0x%02X\n", (int)lv_slider_get_value(red_slider));
+    lv_label_set_text(slider_hex_label, buf2);            
+            
+//    lv_obj_align_to(slider_dec_label, slider_hex_label, LV_ALIGN_OUT_BOTTOM_RIGHT, 0, +3);
                 char buf[8];
                 
     lv_snprintf(buf, sizeof(buf), "%d\n", (int)lv_slider_get_value(red_slider));
     lv_label_set_text(slider_dec_label, buf);
-    char buf2[8];
-    lv_snprintf(buf2, sizeof(buf2), "0x%02X\n", (int)lv_slider_get_value(red_slider));
-    lv_label_set_text(slider_hex_label, buf2);
+    lv_obj_align_to(slider_dec_label, slider_hex_label, LV_ALIGN_OUT_BOTTOM_RIGHT, 0, -24);
+
     
     bsp_led_rgb_set(rgbColor[0],rgbColor[1] ,rgbColor[2]);         
             
@@ -235,14 +240,9 @@ void ui_light_2color_init(lv_obj_t *parent)
         
     lv_slider_set_value(red_slider, LV_OPA_20, LV_ANIM_OFF);
     
-    lv_obj_align(red_slider, LV_ALIGN_LEFT_MID, 8, -35);
+    lv_obj_align(red_slider, LV_ALIGN_LEFT_MID, 3, -35);
     
-        slider_dec_label = lv_label_create(page);
-        lv_obj_set_style_text_font(slider_dec_label, &HelveticaNeue_Regular_24, 0);
-      lv_obj_set_style_text_color(slider_dec_label, lv_color_hex(0xff0000), LV_PART_MAIN);        
-    lv_label_set_text(slider_dec_label, "50");
 
-    lv_obj_align_to(slider_dec_label, red_slider, LV_ALIGN_OUT_TOP_MID, -7, -8);
     
           slider_hex_label = lv_label_create(page);
         lv_obj_set_style_text_font(slider_hex_label, &HelveticaNeue_Regular_24, 0);
@@ -250,6 +250,22 @@ void ui_light_2color_init(lv_obj_t *parent)
     lv_label_set_text(slider_hex_label, "0x3A");
 
     lv_obj_align_to(slider_hex_label, red_slider, LV_ALIGN_OUT_TOP_MID, 0, -35);  
+    
+//            slider_dec_label = lv_label_create(page);
+//        lv_obj_set_style_text_font(slider_dec_label, &HelveticaNeue_Regular_24, 0);
+//      lv_obj_set_style_text_color(slider_dec_label, lv_color_hex(0xff0000), LV_PART_MAIN);        
+//    lv_label_set_text(slider_dec_label, "50");
+//
+//    lv_obj_align_to(slider_dec_label, red_slider, LV_ALIGN_OUT_TOP_MID, -7, -8);
+
+            slider_dec_label = lv_label_create(page);
+        lv_obj_set_style_text_font(slider_dec_label, &HelveticaNeue_Regular_24, 0);
+      lv_obj_set_style_text_color(slider_dec_label, lv_color_hex(0xff0000), LV_PART_MAIN);        
+    lv_label_set_text(slider_dec_label, "51");
+
+    lv_obj_align_to(slider_dec_label, slider_hex_label, LV_ALIGN_OUT_BOTTOM_RIGHT, -3, +3);
+    
+    
 //        green_slider = create_slider(lv_palette_main(LV_PALETTE_GREEN));
 //        
 //        
@@ -422,7 +438,7 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
                   lv_obj_add_flag(slider_hex_label, LV_OBJ_FLAG_HIDDEN);
                   lv_obj_add_flag(slider_dec_label, LV_OBJ_FLAG_HIDDEN);
                   
-                  lv_obj_set_style_border_width(page, 6, 0);
+                  lv_obj_set_style_border_width(page, 7, 0);
                   lv_obj_set_style_border_color(page,  lv_color_make( selected_rgbColor[0], selected_rgbColor[1], selected_rgbColor[2] ), 0);
                   lv_obj_set_style_radius(page, LV_RADIUS_CIRCLE, 0);
                   lv_obj_clear_flag(page, LV_OBJ_FLAG_SCROLLABLE);
@@ -446,10 +462,11 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
                   lv_obj_set_style_bg_color(red_slider, lv_palette_main(LV_PALETTE_BLUE), LV_PART_KNOB);
                   lv_obj_set_style_bg_color(red_slider, lv_color_darken(lv_palette_main(LV_PALETTE_BLUE), LV_OPA_40), LV_PART_INDICATOR); 
                   lv_slider_set_value(red_slider, LV_OPA_20, LV_ANIM_OFF);
-                  lv_obj_set_style_text_color(slider_dec_label, lv_color_hex(0x0000ff), LV_PART_MAIN);      
-                  lv_label_set_text(slider_dec_label, "55"); 
                   lv_obj_set_style_text_color(slider_hex_label, lv_color_hex(0x0000ff), LV_PART_MAIN);      
-                  lv_label_set_text(slider_hex_label, "0x2A"); 
+                  lv_label_set_text(slider_hex_label, "0x33");                
+                  lv_obj_set_style_text_color(slider_dec_label, lv_color_hex(0x0000ff), LV_PART_MAIN);      
+                  lv_label_set_text(slider_dec_label, "51"); 
+                  lv_obj_align_to(slider_dec_label, slider_hex_label, LV_ALIGN_OUT_BOTTOM_RIGHT, 0, 0);
                   light_set_conf.light_cck = LIGHT_CCK_MAX; 
                                     
 //                lv_obj_clear_flag(img_light_pwm_25, LV_OBJ_FLAG_HIDDEN);
@@ -471,10 +488,11 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
                   lv_obj_set_style_bg_color(red_slider, lv_palette_main(LV_PALETTE_GREEN), LV_PART_KNOB);
                   lv_obj_set_style_bg_color(red_slider, lv_color_darken(lv_palette_main(LV_PALETTE_GREEN), LV_OPA_40), LV_PART_INDICATOR);
                   lv_slider_set_value(red_slider, LV_OPA_20, LV_ANIM_OFF);
-                  lv_obj_set_style_text_color(slider_dec_label, lv_color_hex(0x00ff00), LV_PART_MAIN);        
-                  lv_label_set_text(slider_dec_label, "55");
                   lv_obj_set_style_text_color(slider_hex_label, lv_color_hex(0x00ff00), LV_PART_MAIN);      
-                  lv_label_set_text(slider_hex_label, "0x2A");  
+                  lv_label_set_text(slider_hex_label, "0x33");                   
+                  lv_obj_set_style_text_color(slider_dec_label, lv_color_hex(0x00ff00), LV_PART_MAIN);        
+                  lv_label_set_text(slider_dec_label, "51");
+                  lv_obj_align_to(slider_dec_label, slider_hex_label, LV_ALIGN_OUT_BOTTOM_RIGHT, 0, 0);
                   light_set_conf.light_cck = LIGHT_CCK_COOL;
             
                   bsp_led_rgb_set(0x00,55 , 0x00 ); 
@@ -493,10 +511,11 @@ static void light_2color_layer_timer_cb(lv_timer_t *tmr)
                   lv_obj_set_style_bg_color(red_slider, lv_palette_main(LV_PALETTE_RED ), LV_PART_KNOB);
                   lv_obj_set_style_bg_color(red_slider, lv_color_darken(lv_palette_main(LV_PALETTE_RED ), LV_OPA_40), LV_PART_INDICATOR);
                   lv_slider_set_value(red_slider, LV_OPA_20, LV_ANIM_OFF);
-                  lv_obj_set_style_text_color(slider_dec_label, lv_color_hex(0xff0000), LV_PART_MAIN);        
-                  lv_label_set_text(slider_dec_label, "55");
                   lv_obj_set_style_text_color(slider_hex_label, lv_color_hex(0xff0000), LV_PART_MAIN);      
-                  lv_label_set_text(slider_hex_label, "0x2A");   
+                  lv_label_set_text(slider_hex_label, "0x33");                  
+                  lv_obj_set_style_text_color(slider_dec_label, lv_color_hex(0xff0000), LV_PART_MAIN);        
+                  lv_label_set_text(slider_dec_label, "51");
+//                  lv_obj_align_to(slider_dec_label, slider_hex_label, LV_ALIGN_OUT_BOTTOM_RIGHT, 0, -24);
                   light_set_conf.light_cck = LIGHT_CCK_WARM;                  
                   rgbColor[0] = 0;
 			      rgbColor[1] = 0;

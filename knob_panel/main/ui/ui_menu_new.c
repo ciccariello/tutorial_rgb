@@ -8,6 +8,7 @@
 #include "lvgl.h"
 #include <stdio.h>
 #include "esp_system.h"
+#include "misc/lv_area.h"
 #ifdef ESP_IDF_VERSION
 #include "esp_log.h"
 #endif
@@ -34,7 +35,7 @@ lv_layer_t menu_layer = {
     .timer_cb       = main_layer_timer_cb,
 };
 typedef struct {
-    const char *name_CN;
+    lv_color_t string_color;
     const char *name_EN;
     const lv_img_dsc_t *icon;
     const lv_img_dsc_t *icon_ns;
@@ -45,8 +46,8 @@ typedef struct {
 static ui_menu_app_t menu[] = {
 //    {"洗衣模式",    "Jalla Habib",     &icon_washing,      &icon_washing_ns,       LV_COLOR_MAKE(36, 163, 235), &washing_Layer},
 
-    {"恒温器",      "ANKUNFT",  &segnale,   &reverse,    LV_COLOR_MAKE(36, 163, 235), &thermostat_Layer},
-    {"照明模式",    "RGB Demo",  &parking,   &parking_ns,   LV_COLOR_MAKE(33, 160, 239), &light_2color_Layer},    
+    {LV_COLOR_MAKE(36, 163, 235),      " Ankunft",  &segnale,   &segnale,    LV_COLOR_MAKE(36, 163, 235), &thermostat_Layer},
+    {LV_COLOR_MAKE(220, 25, 12),    "R G B",  &parking3,   &parking_ns2,   LV_COLOR_MAKE(220, 25, 12), &light_2color_Layer},    
 //    {"照明模式",    "Jalla Jalla",       &icon_light,        &icon_light_ns,         LV_COLOR_MAKE(255, 229, 147), &light_2color_Layer},
 };
 
@@ -149,13 +150,17 @@ static void menu_event_cb(lv_event_t *e)
             lv_img_set_src(icons[get_app_index(0)], menu[get_app_index(0)].icon);
             lv_obj_set_style_border_color(page, menu[get_app_index(0)].theme_color, 0);
 
-            sys_param_t *param = settings_get_parameter();
-            if (LANGUAGE_CN == param->language) {
-                lv_label_set_text(label_name, menu[get_app_index(0)].name_CN);
-            } else {
+//            sys_param_t *param = settings_get_parameter();
+//            if (LANGUAGE_CN == param->language)
+//             {
+//                lv_label_set_text(label_name, menu[get_app_index(0)].name_CN);
+//            }
+//             else 
+//             {
                 lv_label_set_text(label_name, menu[get_app_index(0)].name_EN);
+                lv_obj_set_style_text_color(label_name, menu[get_app_index(0)].string_color , 0);
                 audio_handle_info(SOUND_TYPE_KNOB);
-            }
+//            }
         }
         feed_clock_time();
 
@@ -216,17 +221,19 @@ void ui_menu_init(lv_obj_t *parent)
     }
 
     label_name = lv_label_create(page);
-    sys_param_t *param = settings_get_parameter();
-    if (LANGUAGE_CN == param->language) {
-        lv_obj_set_style_text_font(label_name, &HelveticaNeue_Regular_24, 0);
-        lv_label_set_text(label_name, menu[app_index].name_CN);
-    } else {
+//    sys_param_t *param = settings_get_parameter();
+//    if (LANGUAGE_CN == param->language) {
+//        lv_obj_set_style_text_font(label_name, &HelveticaNeue_Regular_24, 0);
+//        lv_label_set_text(label_name, menu[app_index].name_CN);
+//    } else {
+	
         lv_obj_set_style_text_font(label_name, &HelveticaNeue_Regular_24, 0);
         lv_label_set_text(label_name, menu[app_index].name_EN);
-    }
+//    }
     lv_obj_set_width(label_name, 150);  /*Set smaller width to make the lines wrap*/
     lv_obj_set_style_text_align(label_name, LV_TEXT_ALIGN_CENTER, 0);
-    lv_obj_align(label_name, LV_ALIGN_BOTTOM_MID, 0, -6);
+    lv_obj_set_style_text_color(label_name, menu[app_index].string_color , 0);
+    lv_obj_align(label_name, LV_ALIGN_CENTER, +52, +10);
 
 
     tips_btn = lv_obj_create(page);
@@ -239,13 +246,13 @@ void ui_menu_init(lv_obj_t *parent)
     tips_label = lv_label_create(tips_btn);
     lv_obj_set_style_text_color(tips_label, lv_color_hex(COLOUR_WHITE), 0);
     lv_obj_center(tips_label);
-    if (LANGUAGE_CN == param->language) {
-        lv_obj_set_style_text_font(tips_label, &HelveticaNeue_Regular_24, 0);
-        lv_label_set_text(tips_label, "已恢复出厂");
-    } else {
+//    if (LANGUAGE_CN == param->language) {
+//        lv_obj_set_style_text_font(tips_label, &HelveticaNeue_Regular_24, 0);
+//        lv_label_set_text(tips_label, "已恢复出厂");
+//    } else {
         lv_obj_set_style_text_font(tips_label, &HelveticaNeue_Regular_24, 0);
         lv_label_set_text(tips_label, "factory default");
-    }
+//    }
     lv_obj_add_flag(tips_btn, LV_OBJ_FLAG_HIDDEN);
 
     lv_obj_add_event_cb(page, menu_event_cb, LV_EVENT_FOCUSED, NULL);
